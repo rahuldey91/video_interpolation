@@ -10,3 +10,5 @@ logs/*
 eval_results*
 *.idea*
 *.pytorch
+
+# *.mp4
