@@ -16,6 +16,8 @@ Maintain overall consistency in the video, including color, lighting, and motion
 ### Solution
 My solution is based on the original LDMVFI (see acknowledgment below) work done by Danier <em>et al.</em> to interpolate between re-arranged frames in a video file. Since LDMVFI generates a single interpolated frame between two given frames, I use binary-search like algorithm to interpolate the gap between any two frames at locations `i` and `j`, i.e., it first generates the `(i+j)/2`-th frame, then it performs binary interpolation between `i` and `(i+j)/2` frames; and between `(i+j)/2` and `j` frames, and so on.
 
+To find out the frames between which interpolation is to be done, I use optical flow between a reference frame (frameA/frameB) and frames in the other segments of the video. The optical flow is computed using [RAFT](https://github.com/princeton-vl/RAFT), and is currently computed pair-wise. An alternate warping based flow aggregation algorithm can be employed for faster flow computation.
+
 A better result can be obtained by using a video-interpolation model that generates the whole chuck of frames betweeen `i` and `j` in a temporally consistent way. [VIDIM](https://vidim-interpolation.github.io/) looks like a promising approach, but they haven't released the source code yet.
 
 ## Dependencies and Installation
